@@ -10,8 +10,5 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   title = 'my-schwarzmueller-project';
-  onSubmit(form: NgForm): void {
-    
-    
-  }
+
 }

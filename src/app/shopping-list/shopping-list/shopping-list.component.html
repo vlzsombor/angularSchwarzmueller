@@ -1,4 +1,32 @@
-<p>shopping-list works!</p>
-<h1>{{mystring}}</h1>
+<div class="container">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" name="name" ngModel required>
+        </div>
+        <div class="col">
+          <label for="amount">Amount</label>
+          <input type="text" id="amount" class="form-control" name="amount" ngModel required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Add or update</button>
+          <button class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+          <button class="btn btn-primary" type="button" >Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
 
-<button class="form-control" name="amount" ngModel required (click)="getHeroes">
+
+  <ul class="list-group">
+    <a
+        class="list-group-item"
+        style="cursor: pointer;"
+        *ngFor="let ingredient of ingredients; let i = index"
+    >
+        {{ ingredient.name }} ({{ ingredient.amount }})
+    </a>
+</ul>

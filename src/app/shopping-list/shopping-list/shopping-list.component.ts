@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Ingredient } from 'src/app/shared/Ingredient';
 import { ShoppingListService } from '../shopping-list.service'
 @Component({
   selector: 'app-shopping-list',
@@ -8,8 +10,25 @@ import { ShoppingListService } from '../shopping-list.service'
 export class ShoppingListComponent {
   constructor(private shoppingListService: ShoppingListService) { }
 
-  mystring: string = "asdfasd "
+  ingredients: Ingredient[] =[];
+
+  ngOnInit(): void {
+    this.ingredients = this.shoppingListService.getHeroes();
+  }
+
   getHeroes(): void {
-    this.mystring = this.shoppingListService.getHeroes();
+  }
+  onSubmit(form: NgForm): void {
+    const value = form.value;
+    const newIngredient = new Ingredient(value.name, value.amount);
+    this.shoppingListService.setHeroes(newIngredient);
+    console.log('hello');
+    this.ingredients = this.shoppingListService.getHeroes();
+
+  }
+
+  delete(): void{
+    this.ingredients = [];
+    this.shoppingListService.deleteHeroes();
   }
 }
